@@ -3,19 +3,11 @@ ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
     ESPAINC=/usr/local/include \
     ESPALIB=/usr/local/lib \
-    GCTPLIB=/usr/local/lib \
-    HDFLIB=/usr/local/lib \
-    ZLIB=/usr/local/lib \
-    SZLIB=/usr/local/lib \
-    JPGLIB=/usr/local/lib \
-    PROJLIB=/usr/local/lib \
-    HDFINC=/usr/local/include \
-    GCTPINC=/usr/local/include \
-    GCTPLINK="-lGctp -lm" \
-    HDFLINK=" -lmfhdf -ldf -lm" \
 		L8_AUX_DIR=/usr/local/src \
     ECS_ENABLE_TASK_IAM_ROLE=true \
     PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python2.7/site-packages"
+
+RUN pip install scipy gsutil awscli 
 
 RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
@@ -49,8 +41,5 @@ RUN cd ${SRC_DIR} \
     && python setup.py build \
     && python setup.py install
 
-RUN pip install scipy gsutil awscli 
-
 ENTRYPOINT ["/bin/sh", "-c"]
-# CMD ["/usr/local/bin/updatelads.py", "--today"]
 
