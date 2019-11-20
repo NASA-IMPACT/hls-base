@@ -6,7 +6,7 @@ The `lasrc` and `hls` code requires a number of [dependencies](https://github.co
 
 See the instructions in the [espa-dockerfiles](https://github.com/developmentseed/espa-dockerfiles) repository for building the external dependencies image.
 
-After building the dependencies image, following the steps outlined [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_AWSCLI.html) you can tag this image as `552819999234.dkr.ecr.us-east-1.amazonaws.com/espa/external` and push it to ECR.
+After building the dependencies image, following the steps outlined [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_AWSCLI.html) you can tag this image as `350996086543.dkr.ecr.us-west-2.amazonaws.com/espa/external` and push it to ECR.
 
 
 After building your dependencies image and pushing it to ECR you can build the `hls-base` image with
