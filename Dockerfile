@@ -1,4 +1,4 @@
-FROM 552819999234.dkr.ecr.us-east-1.amazonaws.com/espa/external:latest
+FROM 350996086543.dkr.ecr.us-west-2.amazonaws.com/espa/external:latest
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
     ESPAINC=/usr/local/include \

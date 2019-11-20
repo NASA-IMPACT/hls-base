@@ -6,6 +6,5 @@ This repository contains a base Dockerfile for shared libraries for landast and 
 $ docker build --tag hls-base .
 ```
 
-You can then tag this `hls-base` image as `552819999234.dkr.ecr.us-east-1.amazonaws.com/hls-base` and push it to ECR.
+You can then tag this `hls-base` image as `350996086543.dkr.ecr.us-west-2.amazonaws.com/hls-base` and push it to ECR.
 
-ADD ME: Instructions about running lasrc_aux
