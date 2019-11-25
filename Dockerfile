@@ -11,7 +11,7 @@ RUN pip install scipy gsutil awscli
 
 RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
-    && git clone https://github.com/USGS-EROS/${REPO_NAME}.git ${REPO_NAME} \
+    && git clone https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
     && make BUILD_STATIC=yes ENABLE_THREADING=yes \
     && make install \
