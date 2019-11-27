@@ -7,7 +7,7 @@ ENV PREFIX=/usr/local \
     ECS_ENABLE_TASK_IAM_ROLE=true \
     PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python2.7/site-packages"
 
-RUN pip install scipy gsutil awscli 
+RUN pip install scipy gsutil awscli gdal~=2.4
 
 RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
