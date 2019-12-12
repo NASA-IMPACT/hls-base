@@ -16,10 +16,18 @@ After building the dependencies image, following the steps outlined [here](https
 After building your dependencies image and pushing it to ECR you can build the `hls-base` image with:
 
 ```shell
-$ docker build --build-arg AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID -t hls-base .
+$ docker build --build-arg AWS_ACCOUNT_ID="{$AWS_ACCOUNT_ID}" -t hls-base .
 ```
 
 Note: The command above assumes you have exported an environment variable `AWS_ACCOUNT_ID` which references the AWS account where the espa/external reference image is stored.
 
-You can then tag this `hls-base` image as `<AWS_ACCOUNT_ID>.dkr.ecr.us-west-2.amazonaws.com/hls-base` and push it to ECR.
+You can then tag and push this `hls-base` image as `<AWS_ACCOUNT_ID>.dkr.ecr.us-west-2.amazonaws.com/hls-base` and push it to ECR.
+
+```shell
+$ docker tag hls-base "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/hls-base"
+```
+
+```shell
+$ docker push "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/hls-base"
+```
 

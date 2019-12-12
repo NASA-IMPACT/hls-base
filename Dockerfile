@@ -1,4 +1,3 @@
-ARG AWS_ACCOUNT_ID=111111111111
 FROM ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/espa/external:latest
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
