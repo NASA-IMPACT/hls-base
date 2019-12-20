@@ -1,3 +1,4 @@
+ARG AWS_ACCOUNT_ID
 FROM ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/espa/external:latest
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
@@ -40,6 +41,11 @@ RUN cd ${SRC_DIR} \
     && cd python-fmask-0.5.4 \
     && python setup.py build \
     && python setup.py install
+
+COPY ./scripts "${SRC_DIR}/scripts"
+RUN pip install "${SRC_DIR}/scripts/hlsfmask"
+
+RUN pip install --upgrade git+https://github.com/USGS-EROS/espa-python-library.git@v1.1.0#espa
 
 ENTRYPOINT ["/bin/sh", "-c"]
 
