@@ -92,7 +92,10 @@ def getCmdargs():
     params.add_argument("--greensnowthreshold", default=dfltGreenSnowThresh, type=float,
         help=("Threshold for Green reflectance (range [0-1]) for snow detection "+
             "(default=%(default)s). Increase this to reduce snow commission errors"))
-
+    stricFmask = config.FmaskConfig.strictFmask
+    params.add_argument("--strict", default=strictFmask, type=bool,
+        help=("Use strict Fmask setttings from base Fmask"+
+            "(default=%(default)s). Set false to disable"))
     cmdargs = parser.parse_args()
 
     return cmdargs
@@ -247,6 +250,7 @@ def mainRoutine():
     fmaskConfig.setEqn17CloudProbThresh(cmdargs.cloudprobthreshold / 100)    # Note conversion from percentage
     fmaskConfig.setEqn20NirSnowThresh(cmdargs.nirsnowthreshold)
     fmaskConfig.setEqn20GreenSnowThresh(cmdargs.greensnowthreshold)
+    fmaskConfig.setStrictFmask(cmdargs.strict)
 
     # Work out a suitable buffer size, in pixels, dependent on the resolution of the input TOA image
     toaImgInfo = fileinfo.ImageInfo(cmdargs.toa)
