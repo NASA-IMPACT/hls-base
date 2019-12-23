@@ -257,6 +257,14 @@ def mainRoutine():
     fmaskConfig.setCloudBufferSize(int(cmdargs.cloudbufferdistance / toaImgInfo.xRes))
     fmaskConfig.setShadowBufferSize(int(cmdargs.shadowbufferdistance / toaImgInfo.xRes))
 
+    # Redefine output constants to match Fortran Fmask 4.0
+    fmask.OUTCODE_NULL = 5
+    fmask.OUTCODE_CLEAR = 0
+    fmask.OUTCODE_CLOUD = 4 
+    fmask.OUTCODE_SHADOW = 2
+    fmask.OUTCODE_SNOW = 3
+    fmask.OUTCODE_WATER = 1 
+
     fmask.doFmask(fmaskFilenames, fmaskConfig)
 
     if tempStack and not cmdargs.keepintermediates:
