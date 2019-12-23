@@ -96,6 +96,10 @@ def getCmdargs():
     params.add_argument("--strict", default=strictFmask, type=bool,
         help=("Use strict Fmask setttings from base Fmask"+
             "(default=%(default)s). Set false to disable"))
+    dfltDisplacement = config.sen2displacementTest
+    params.add_argument("--displacement", default=dfltDisplacement, type=bool,
+        help=("Use the Frantz (2018) parallax displacement test"+
+            "(default=%(default)s). Set false to disable"))
     cmdargs = parser.parse_args()
 
     return cmdargs
@@ -251,6 +255,7 @@ def mainRoutine():
     fmaskConfig.setEqn20NirSnowThresh(cmdargs.nirsnowthreshold)
     fmaskConfig.setEqn20GreenSnowThresh(cmdargs.greensnowthreshold)
     fmaskConfig.setStrictFmask(cmdargs.strict)
+    fmaskConfig.setSen2displacementTest(cmdargs.displacement)
 
     # Work out a suitable buffer size, in pixels, dependent on the resolution of the input TOA image
     toaImgInfo = fileinfo.ImageInfo(cmdargs.toa)
@@ -260,10 +265,10 @@ def mainRoutine():
     # Redefine output constants to match Fortran Fmask 4.0
     fmask.OUTCODE_NULL = 5
     fmask.OUTCODE_CLEAR = 0
-    fmask.OUTCODE_CLOUD = 4 
+    fmask.OUTCODE_CLOUD = 4
     fmask.OUTCODE_SHADOW = 2
     fmask.OUTCODE_SNOW = 3
-    fmask.OUTCODE_WATER = 1 
+    fmask.OUTCODE_WATER = 1
 
     fmask.doFmask(fmaskFilenames, fmaskConfig)
 
