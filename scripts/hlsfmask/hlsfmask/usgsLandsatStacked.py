@@ -92,11 +92,11 @@ def getCmdargs():
     params.add_argument("--greensnowthreshold", default=dfltGreenSnowThresh, type=float,
         help=("Threshold for Green reflectance (range [0-1]) for snow detection "+
             "(default=%(default)s). Increase this to reduce snow commission errors"))
-    stricFmask = config.FmaskConfig.strictFmask
+    strictFmask = config.FmaskConfig.strictFmask
     params.add_argument("--strict", default=strictFmask, type=bool,
         help=("Use strict Fmask setttings from base Fmask"+
             "(default=%(default)s). Set false to disable"))
-    dfltDisplacement = config.sen2displacementTest
+    dfltDisplacement = config.FmaskConfig.sen2displacementTest
     params.add_argument("--displacement", default=dfltDisplacement, type=bool,
         help=("Use the Frantz (2018) parallax displacement test"+
             "(default=%(default)s). Set false to disable"))
