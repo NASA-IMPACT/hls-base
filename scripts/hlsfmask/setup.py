@@ -8,5 +8,5 @@ setup(name='hlsfmask',
       author_email='sean@developmentseed.org',
       license='MIT',
       packages=['hlsfmask'],
-      scripts=['bin/hlsfmask_usgsLandsatStacked.py'],
+      scripts=['bin/hlsfmask_usgsLandsatStacked.py','bin/hlsfmask_sentinel2Stacked.py'],
       zip_safe=False)

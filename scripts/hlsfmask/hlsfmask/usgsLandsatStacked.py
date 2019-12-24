@@ -96,10 +96,6 @@ def getCmdargs():
     params.add_argument("--strict", default=strictFmask, action='store_true',
         help=("Use strict Fmask setttings from base Fmask"+
             "(default=%(default)s). Set false to disable"))
-    dfltDisplacement = config.FmaskConfig.sen2displacementTest
-    params.add_argument("--displacement", default=dfltDisplacement, action='store_true',
-        help=("Use the Frantz (2018) parallax displacement test"+
-            "(default=%(default)s). Set false to disable"))
     cmdargs = parser.parse_args()
 
     return cmdargs
@@ -255,7 +251,6 @@ def mainRoutine():
     fmaskConfig.setEqn20NirSnowThresh(cmdargs.nirsnowthreshold)
     fmaskConfig.setEqn20GreenSnowThresh(cmdargs.greensnowthreshold)
     fmaskConfig.setStrictFmask(cmdargs.strict)
-    fmaskConfig.setSen2displacementTest(cmdargs.displacement)
 
     # Work out a suitable buffer size, in pixels, dependent on the resolution of the input TOA image
     toaImgInfo = fileinfo.ImageInfo(cmdargs.toa)
