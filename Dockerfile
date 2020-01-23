@@ -12,24 +12,24 @@ ENV PREFIX=/usr/local \
 
 RUN pip install scipy gsutil awscli gdal~=2.4
 
-RUN REPO_NAME=espa-product-formatter \
-    && cd $SRC_DIR \
-    && git clone https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
-    && cd ${REPO_NAME} \
-    && make BUILD_STATIC=yes ENABLE_THREADING=yes \
-    && make install \
-    && cd $SRC_DIR \
-    && rm -rf ${REPO_NAME}
+# RUN REPO_NAME=espa-product-formatter \
+    # && cd $SRC_DIR \
+    # && git clone https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
+    # && cd ${REPO_NAME} \
+    # && make BUILD_STATIC=yes ENABLE_THREADING=yes \
+    # && make install \
+    # && cd $SRC_DIR \
+    # && rm -rf ${REPO_NAME}
 
-RUN REPO_NAME=espa-surface-reflectance \
-    && cd $SRC_DIR \
-    && git clone https://github.com/developmentseed/${REPO_NAME}.git \
-    && cd ${REPO_NAME} \
-    && make BUILD_STATIC=yes ENABLE_THREADING=yes \
-    && make install \
-    && make install-lasrc-aux \
-    && cd $SRC_DIR \
-    && rm -rf ${REPO_NAME}
+# RUN REPO_NAME=espa-surface-reflectance \
+    # && cd $SRC_DIR \
+    # && git clone https://github.com/developmentseed/${REPO_NAME}.git \
+    # && cd ${REPO_NAME} \
+    # && make BUILD_STATIC=yes ENABLE_THREADING=yes \
+    # && make install \
+    # && make install-lasrc-aux \
+    # && cd $SRC_DIR \
+    # && rm -rf ${REPO_NAME}
 
 # RUN cd ${SRC_DIR} \
     # && wget https://bitbucket.org/chchrsc/rios/downloads/rios-1.4.8.tar.gz \
@@ -46,21 +46,22 @@ RUN REPO_NAME=espa-surface-reflectance \
     
 # Install the MCR dependencies and some things we'll need and download the MCR
 # from Mathworks -silently install it
-RUN mkdir /mcr-install && \
-    mkdir /usr/local/MATLAB && \
-    cd /mcr-install && \
-    wget -q  https://ssd.mathworks.com/supportfiles/downloads/R2018b/deployment_files/R2018b/installers/glnxa64/MCR_R2018b_glnxa64_installer.zip && \
-    unzip -q MCR_R2018b_glnxa64_installer.zip  && \
-    rm -f MCR_R2018b_glnxa64_installer.zip  && \
-    ./install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent && \
-    cd / && \
-    rm -rf mcr-install
+# RUN mkdir /mcr-install && \
+    # mkdir /usr/local/MATLAB && \
+    # cd /mcr-install && \
+    # wget -q  https://ssd.mathworks.com/supportfiles/downloads/R2018b/deployment_files/R2018b/installers/glnxa64/MCR_R2018b_glnxa64_installer.zip && \
+    # unzip -q MCR_R2018b_glnxa64_installer.zip  && \
+    # rm -f MCR_R2018b_glnxa64_installer.zip  && \
+    # ./install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent && \
+    # cd / && \
+    # rm -rf mcr-install
+COPY ./matlabenv /etc/environment
 
 RUN cd ${SRC_DIR} \
-  && wget --no-check-certificate --no-proxy
-  'http://fmask4installer.s3.amazonaws.com/Fmask_4_0.install' \
+  && wget --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_0.install' \
   && chmod +x Fmask_4_0.install \
-  && ./Fmask_4_0.install \
+  && ln -s /etc/ssl/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt \
+  && ./Fmask_4_0.install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
   && rm Fmask_4_0.install
 
 COPY ./scripts "${SRC_DIR}/scripts"
