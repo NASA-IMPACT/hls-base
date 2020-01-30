@@ -1,13 +1,14 @@
-# ARG AWS_ACCOUNT_ID
-FROM 018923174646.dkr.ecr.us-west-2.amazonaws.com/espa/external:latest
+ARG AWS_ACCOUNT_ID
+FROM ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/espa/external:latest
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
     ESPAINC=/usr/local/include \
     ESPALIB=/usr/local/lib \
-		L8_AUX_DIR=/usr/local/src \
+    L8_AUX_DIR=/usr/local/src \
     ECS_ENABLE_TASK_IAM_ROLE=true \
-    PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python2.7/site-packages"
-    # XAPPLRESDIR=/usr/local/MATLAB/v95/X11/app-defaults
+    PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python2.7/site-packages" \
+    LD_LIBRARY_PATH=/usr/local/MATLAB/v95/runtime/glnxa64:/usr/local/MATLAB/v95/bin/glnxa64:/usr/local/MATLAB/v95/sys/os/glnxa64A \
+    XAPPLRESDIR=/usr/local/MATLAB/v95/X11/app-defaults
 
 RUN pip install scipy gsutil awscli gdal~=2.4
 
@@ -30,7 +31,10 @@ RUN REPO_NAME=espa-surface-reflectance \
     && cd $SRC_DIR \
     && rm -rf ${REPO_NAME}
 
+RUN yum -y install java-1.8.0-openjdk-devel
 COPY ./matlabenv /etc/environment
+
+RUN pip install --upgrade git+https://github.com/USGS-EROS/espa-python-library.git@v1.1.0#espa
 
 RUN cd ${SRC_DIR} \
   && wget --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_0.install' \
@@ -39,14 +43,6 @@ RUN cd ${SRC_DIR} \
   && ./Fmask_4_0.install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
   && rm Fmask_4_0.install
 
-RUN yum -y install libXt \
-  && groupinstall -y "X Window System"
-
-COPY ./scripts "${SRC_DIR}/scripts"
-COPY ./download.sh "${PREFIX}"
-# RUN pip install "${SRC_DIR}/scripts/hlsfmask"
-
-# RUN pip install --upgrade git+https://github.com/USGS-EROS/espa-python-library.git@v1.1.0#espa
+RUN yum -y install libXt
 
 ENTRYPOINT ["/bin/sh", "-c"]
-
