@@ -6,9 +6,7 @@ ENV PREFIX=/usr/local \
     ESPALIB=/usr/local/lib \
     L8_AUX_DIR=/usr/local/src \
     ECS_ENABLE_TASK_IAM_ROLE=true \
-    PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python2.7/site-packages" \
-    LD_LIBRARY_PATH=/usr/local/MATLAB/v95/runtime/glnxa64:/usr/local/MATLAB/v95/bin/glnxa64:/usr/local/MATLAB/v95/sys/os/glnxa64A \
-    XAPPLRESDIR=/usr/local/MATLAB/v95/X11/app-defaults
+    PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python2.7/site-packages"
 
 RUN pip install scipy gsutil awscli gdal~=2.4
 
