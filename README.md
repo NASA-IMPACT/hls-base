@@ -28,6 +28,6 @@ $ docker tag hls-base "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/hls-bas
 ```
 
 ```shell
-$ docker push "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/hls-base-matlab"
+$ docker push "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/hls-base"
 ```
 
