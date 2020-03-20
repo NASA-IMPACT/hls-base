@@ -6,6 +6,7 @@ ENV PREFIX=/usr/local \
     ESPALIB=/usr/local/lib \
     L8_AUX_DIR=/usr/local/src \
     ECS_ENABLE_TASK_IAM_ROLE=true \
+    OMP_NUM_THREADS=4 \
     PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python2.7/site-packages"
 
 RUN pip install scipy gsutil awscli gdal~=2.4
