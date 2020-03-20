@@ -36,11 +36,11 @@ COPY ./matlabenv /etc/environment
 RUN pip install --upgrade git+https://github.com/USGS-EROS/espa-python-library.git@v1.1.0#espa
 
 RUN cd ${SRC_DIR} \
-  && wget --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_0.install' \
-  && chmod +x Fmask_4_0.install \
+  && wget --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_1_Linux_mcr.install' \
+  && chmod +x Fmask_4_1_Linux_mcr.install \
   && ln -s /etc/ssl/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt \
-  && ./Fmask_4_0.install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
-  && rm Fmask_4_0.install
+  && ./Fmask_4_1_Linux_mcr.install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
+  && rm Fmask_4_1_Linux_mcr.install
 
 RUN yum -y install libXt
 
