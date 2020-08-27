@@ -1,5 +1,4 @@
-ARG AWS_ACCOUNT_ID
-FROM ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/espa/external-c2:latest
+FROM 018923174646.dkr.ecr.us-west-2.amazonaws.com/espa/external-c2:latest
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
     ESPAINC=/usr/local/include \
