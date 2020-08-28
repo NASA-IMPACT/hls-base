@@ -12,7 +12,6 @@ ENV PREFIX=/usr/local \
 RUN pip3 install scipy gsutil awscli gdal~=2.4
 RUN yum -y install java-1.8.0-openjdk-devel
 COPY ./matlabenv /etc/environment
-# COPY ./Fmask_4_2_Linux_mcr.install ${SRC_DIR}
 RUN cd ${SRC_DIR} \
   && wget -q --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_2_Linux_mcr.install' \
   && chmod +x Fmask_4_2_Linux_mcr.install \
