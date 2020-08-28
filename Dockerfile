@@ -14,7 +14,7 @@ RUN yum -y install java-1.8.0-openjdk-devel
 COPY ./matlabenv /etc/environment
 # COPY ./Fmask_4_2_Linux_mcr.install ${SRC_DIR}
 RUN cd ${SRC_DIR} \
-  && wget --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_2_Linux_mcr.install' \
+  && wget -q --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_2_Linux_mcr.install' \
   && chmod +x Fmask_4_2_Linux_mcr.install \
   && ln -s /etc/ssl/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt \
   && ./Fmask_4_2_Linux_mcr.install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
