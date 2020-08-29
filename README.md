@@ -16,18 +16,9 @@ After building the dependencies image, following the steps outlined [here](https
 After building your dependencies image and pushing it to ECR you can build the `hls-base` image with:
 
 ```shell
-$ docker build --no-cache --build-arg AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID}" -t hls-base .
+$ docker build --no-cache -t hls-base .
 ```
+### CI
+The repository contains two CI workflows. When commits are pushed to the collection2 branch a new image is built and pushed to ECR with no tag.
 
-Note: The command above assumes you have exported an environment variable `AWS_ACCOUNT_ID` which references the AWS account where the espa/external reference image is stored.
-
-You can then tag and push this `hls-base` image as `<AWS_ACCOUNT_ID>.dkr.ecr.us-west-2.amazonaws.com/hls-base` and push it to ECR.
-
-```shell
-$ docker tag hls-base "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/hls-base"
-```
-
-```shell
-$ docker push "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/hls-base"
-```
-
+When a new release is created from collection2 a new image is built and pushed to ECR with the release version as a tag.
