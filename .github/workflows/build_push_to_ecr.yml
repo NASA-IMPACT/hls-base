@@ -2,7 +2,7 @@ name: build_push_to_ecr
 
 on:
   push:
-    branches: [ collection2, collection2-3.0.5 ]
+    branches: [ collection2, eros-collection2-3.0.5 ]
 
 jobs:
   build_push_to_ecr:
