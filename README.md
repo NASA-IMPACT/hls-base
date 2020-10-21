@@ -9,7 +9,7 @@ See the instructions in the [espa-dockerfiles](https://github.com/nasa-impact/es
 
 Specifically, you will need to run `make centos.base` and `make centos.external`.
 
-After building the dependencies image, following the steps outlined [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_AWSCLI.html) you can tag this image as `<AWS_ACCOUNT_ID>.dkr.ecr.us-west-2.amazonaws.com/espa/external` and push it to ECR.
+After building the dependencies image, following the steps outlined [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_AWSCLI.html) you can tag this image as `018923174646.dkr.ecr.us-west-2.amazonaws.com/espa/external` and push it to ECR.
 
 
 After building your dependencies image and pushing it to ECR you can build the `hls-base` image with:
