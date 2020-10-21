@@ -16,8 +16,8 @@ RUN cd ${SRC_DIR} \
   && wget -q --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_3_Linux_mcr.install' \
   && chmod +x Fmask_4_3_Linux_mcr.install \
   && ln -s /etc/ssl/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt \
-  && ./Fmask_4_2_Linux_mcr.install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
-  && rm Fmask_4_2_Linux_mcr.install
+  && ./Fmask_4_3_Linux_mcr.install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
+  && rm Fmask_4_3_Linux_mcr.install
 RUN yum -y install libXt
 
 RUN REPO_NAME=espa-product-formatter \
