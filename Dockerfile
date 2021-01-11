@@ -3,9 +3,7 @@ ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
     ESPAINC=/usr/local/include \
     ESPALIB=/usr/local/lib \
-    L8_AUX_DIR=/usr/local/src \
     ECS_ENABLE_TASK_IAM_ROLE=true \
-    OMP_NUM_THREADS=4 \
     PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python3.6/site-packages" \
     ESPA_SCHEMA="${PREFIX}/schema/espa_internal_metadata_v2_2.xsd"
 
@@ -22,7 +20,7 @@ RUN yum -y install libXt
 
 RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
-    && git clone -b v3.0.1 https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
+    && git clone -b espa-product-formatter-v3.0.2 https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
     && make BUILD_STATIC=yes ENABLE_THREADING=yes \
     && make install \
@@ -30,7 +28,7 @@ RUN REPO_NAME=espa-product-formatter \
     && rm -rf ${REPO_NAME}
 RUN REPO_NAME=espa-surface-reflectance \
     && cd $SRC_DIR \
-    && git clone -b eros-collection2-3.0.5 https://github.com/NASA-IMPACT/${REPO_NAME}.git \
+    && git clone -b eros-collection2-3.1.0 https://github.com/NASA-IMPACT/${REPO_NAME}.git \
     && cd ${REPO_NAME} \
     && make BUILD_STATIC=yes ENABLE_THREADING=yes \
     && make install \
