@@ -1,5 +1,5 @@
-ARG lasrc_version
 FROM 018923174646.dkr.ecr.us-west-2.amazonaws.com/espa/external-c2:latest
+ARG lasrc_version
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
     ESPAINC=/usr/local/include \
