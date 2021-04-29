@@ -30,7 +30,7 @@ jobs:
         run: docker build . --tag hls-base-3.1.0
 
       - name: Push to ECR 3.1.0
-        id: push-latest-ecr
+        id: push-ecr-3.1.0
         uses: jwalton/gh-ecr-push@v1
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -46,7 +46,7 @@ jobs:
         run: docker build . --tag hls-base-3.0.5
 
       - name: Push to ECR 3.0.5
-        id: push-latest-ecr
+        id: push-ecr-3.0.5
         uses: jwalton/gh-ecr-push@v1
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
