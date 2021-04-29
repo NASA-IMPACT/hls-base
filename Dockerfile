@@ -1,3 +1,4 @@
+ARG lasrc_version
 FROM 018923174646.dkr.ecr.us-west-2.amazonaws.com/espa/external-c2:latest
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
@@ -28,7 +29,7 @@ RUN REPO_NAME=espa-product-formatter \
     && rm -rf ${REPO_NAME}
 RUN REPO_NAME=espa-surface-reflectance \
     && cd $SRC_DIR \
-    && git clone -b eros-collection2-3.1.0_options https://github.com/NASA-IMPACT/${REPO_NAME}.git \
+    && git clone -b "eros-collection2-${lasrc_version}" https://github.com/NASA-IMPACT/${REPO_NAME}.git \
     && cd ${REPO_NAME} \
     && make BUILD_STATIC=yes ENABLE_THREADING=yes \
     && make install \
