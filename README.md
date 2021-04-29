@@ -14,7 +14,7 @@ After building the dependencies image, following the steps outlined [here](https
 After building your dependencies image and pushing it to ECR you can build the `hls-base` image with:
 
 ```shell
-$ docker build --no-cache -t hls-base .
+$ docker build --no-cache -t hls-base --build-arg lasrc_version=3.1.0 .
 ```
 ### CI
 The repository contains two CI workflows. When commits are pushed to the collection2 branch a new image is built and pushed to ECR with no tag.
