@@ -39,9 +39,6 @@ jobs:
           local-image: hls-base-3.1.0
           image: hls-base-3.1.0
 
-      - name: Remove 3.1.0
-        run: docker rmi $(docker images | grep 'hls-base-3.1.0')
-
       - name: Build image 3.0.5
         run: docker build . --tag hls-base-3.0.5 --build-arg lasrc_version=3.0.5
 
