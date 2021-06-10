@@ -23,7 +23,7 @@ RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
     && git clone -b v3.0.2-backtrace https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
-    && make BUILD_STATIC=yes ENABLE_THREADING=yes EXTRA=-rdynamic \
+    && make BUILD_STATIC=yes ENABLE_THREADING=yes \
     && make install \
     && cd $SRC_DIR \
     && rm -rf ${REPO_NAME}
