@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Create more disk space
+        run: sudo rm -rf /usr/share/dotnet && sudo rm -rf /opt/ghc && sudo rm -rf "/usr/local/share/boost" && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -23,15 +26,28 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build . --tag hls-base-c2
+      - name: Build image 3.1.0
+        run: docker build . --tag hls-base-3.1.0 --build-arg lasrc_version=3.1.0
 
-      - name: Push to latest ECR
-        id: push-latest-ecr
+      - name: Push to ECR 3.1.0
+        id: push-ecr-310
         uses: jwalton/gh-ecr-push@v1
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: us-west-2
-          local-image: hls-base-c2
-          image: hls-base-c2
+          local-image: hls-base-3.1.0
+          image: hls-base-3.1.0
+
+      - name: Build image 3.0.5
+        run: docker build . --tag hls-base-3.0.5 --build-arg lasrc_version=3.0.5
+
+      - name: Push to ECR 3.0.5
+        id: push-ecr-305
+        uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-west-2
+          local-image: hls-base-3.0.5
+          image: hls-base-3.0.5

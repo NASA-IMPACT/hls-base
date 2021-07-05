@@ -1,4 +1,5 @@
 FROM 018923174646.dkr.ecr.us-west-2.amazonaws.com/espa/external-c2:latest
+ARG lasrc_version
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
     ESPAINC=/usr/local/include \
@@ -20,7 +21,7 @@ RUN yum -y install libXt
 
 RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
-    && git clone -b v3.0.2 https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
+    && git clone -b v3.0.2-backtrace https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
     && make BUILD_STATIC=yes ENABLE_THREADING=yes \
     && make install \
@@ -28,7 +29,7 @@ RUN REPO_NAME=espa-product-formatter \
     && rm -rf ${REPO_NAME}
 RUN REPO_NAME=espa-surface-reflectance \
     && cd $SRC_DIR \
-    && git clone -b eros-collection2-3.0.5 https://github.com/NASA-IMPACT/${REPO_NAME}.git \
+    && git clone -b "eros-collection2-${lasrc_version}" https://github.com/NASA-IMPACT/${REPO_NAME}.git \
     && cd ${REPO_NAME} \
     && make BUILD_STATIC=yes ENABLE_THREADING=yes \
     && make install \
