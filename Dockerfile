@@ -21,7 +21,7 @@ RUN yum -y install libXt
 
 RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
-    && git clone -b v3.0.2-backtrace https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
+    && git clone -b v3.2.0 https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
     && make BUILD_STATIC=yes ENABLE_THREADING=yes \
     && make install \
