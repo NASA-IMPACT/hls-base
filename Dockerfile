@@ -6,24 +6,26 @@ ENV PREFIX=/usr/local \
     ESPALIB=/usr/local/lib \
     ECS_ENABLE_TASK_IAM_ROLE=true \
     PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python3.6/site-packages" \
-    ESPA_SCHEMA="${PREFIX}/schema/espa_internal_metadata_v2_2.xsd"
+    ESPA_SCHEMA="${PREFIX}/schema/espa_internal_metadata_v2_2.xsd" \
+    FMASK_VERSION="4_5"
 
 RUN pip3 install scipy gsutil awscli gdal~=2.4
 RUN yum -y install java-1.8.0-openjdk-devel
 COPY ./matlabenv /etc/environment
 RUN cd ${SRC_DIR} \
-  && wget -q --no-check-certificate --no-proxy 'http://fmask4installer.s3.amazonaws.com/Fmask_4_3_Linux_mcr.install' \
-  && chmod +x Fmask_4_3_Linux_mcr.install \
+  && wget -q --no-check-certificate --no-proxy "http://fmask4installer.s3.amazonaws.com/Fmask_${FMASK_VERSION}_Linux_mcr.install" \
+  && chmod +x "Fmask_${FMASK_VERSION}_Linux_mcr.install" \
   && ln -s /etc/ssl/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt \
-  && ./Fmask_4_3_Linux_mcr.install -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
-  && rm Fmask_4_3_Linux_mcr.install
+  && "./Fmask_${FMASK_VERSION}_Linux_mcr.install" -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
+  && rm "Fmask_${FMASK_VERSION}_Linux_mcr.install"
 RUN yum -y install libXt
+COPY ./run_Fmask.sh /usr/bin
 
 RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
-    && git clone -b v3.0.2-backtrace https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
+    && git clone -b v3.2.0 https://github.com/NASA-IMPACT/${REPO_NAME}.git ${REPO_NAME} \
     && cd ${REPO_NAME} \
-    && make BUILD_STATIC=yes ENABLE_THREADING=yes \
+    && make BUILD_STATIC=yes \
     && make install \
     && cd $SRC_DIR \
     && rm -rf ${REPO_NAME}
