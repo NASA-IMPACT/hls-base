@@ -33,7 +33,7 @@ RUN REPO_NAME=espa-surface-reflectance \
     && cd $SRC_DIR \
     && git clone -b "eros-collection2-${lasrc_version}" https://github.com/NASA-IMPACT/${REPO_NAME}.git \
     && cd ${REPO_NAME} \
-    && make BUILD_STATIC=yes ENABLE_THREADING=yes \
+    && make ENABLE_THREADING=yes \
     && make install \
     && make install-lasrc-aux \
     && cd $SRC_DIR \
