@@ -27,7 +27,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Build image 3.3.0
+      - name: Build image 3.5.1
         run: docker build . --tag hls-base-3.5.1 --build-arg lasrc_version=3.5.1
 
       - name: Push to ECR 3.5.1
