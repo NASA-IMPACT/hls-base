@@ -4,11 +4,18 @@ ENV PREFIX=/usr/local \
     ESPAINC=/usr/local/include \
     ESPALIB=/usr/local/lib \
     ECS_ENABLE_TASK_IAM_ROLE=true \
-    PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python3.6/site-packages" \
+    PYTHONPATH="${PREFIX}/lib/python3.6/site-packages" \
     ESPA_SCHEMA="${PREFIX}/schema/espa_internal_metadata_v2_2.xsd" \
     FMASK_VERSION="4_7"
 
 RUN pip3 install scipy gsutil awscli gdal~=2.4
+
+# Centos 7 was EOL on June 30, 2024, but packages are available on the vault
+# giving us a grace period to upgrade
+RUN sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/CentOS-*.repo \
+  && sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/CentOS-*.repo \
+  && sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo
+
 RUN yum -y install java-1.8.0-openjdk-devel
 COPY ./matlabenv /etc/environment
 RUN cd ${SRC_DIR} \
