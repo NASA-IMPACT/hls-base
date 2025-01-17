@@ -1,5 +1,4 @@
 FROM 018923174646.dkr.ecr.us-west-2.amazonaws.com/espa/external-c2:latest
-ARG lasrc_version
 ENV PREFIX=/usr/local \
     SRC_DIR=/usr/local/src \
     ESPAINC=/usr/local/include \
@@ -7,7 +6,7 @@ ENV PREFIX=/usr/local \
     ECS_ENABLE_TASK_IAM_ROLE=true \
     PYTHONPATH="${PYTHONPATH}:${PREFIX}/lib/python3.6/site-packages" \
     ESPA_SCHEMA="${PREFIX}/schema/espa_internal_metadata_v2_2.xsd" \
-    FMASK_VERSION="4_6"
+    FMASK_VERSION="4_7"
 
 RUN pip3 install scipy gsutil awscli gdal~=2.4
 RUN yum -y install java-1.8.0-openjdk-devel
@@ -31,7 +30,7 @@ RUN REPO_NAME=espa-product-formatter \
     && rm -rf ${REPO_NAME}
 RUN REPO_NAME=espa-surface-reflectance \
     && cd $SRC_DIR \
-    && git clone -b "eros-collection2-${lasrc_version}" https://github.com/NASA-IMPACT/${REPO_NAME}.git \
+    && git clone -b "eros-collection2-3.5.1" https://github.com/NASA-IMPACT/${REPO_NAME}.git \
     && cd ${REPO_NAME} \
     && make ENABLE_THREADING=yes \
     && make install \
