@@ -1,12 +1,12 @@
-name: build_push_release_ecr
+name: build_push_pr_ecr
 
 on:
-  release:
-    branches: [ master ]
-    types: [ published ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [ dev ]
 
 jobs:
-  build_push_release_ecr:
+  build_push_to_ecr:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,12 +30,12 @@ jobs:
       - name: Build image
         run: docker build . --tag hls-base
 
-      - name: Push to prod ECR
-        id: push-prod-ecr
+      - name: Push to latest ECR
+        id: push-latest-ecr
         uses: jwalton/gh-ecr-push@v1
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: us-west-2
           local-image: hls-base
-          image: hls-base:${GITHUB_REF##*/}
+          image: hls-base:${{ github.event.pull_request.number }}
