@@ -25,7 +25,7 @@ RUN cd ${SRC_DIR} \
   && "./Fmask_${FMASK_VERSION}_Linux_mcr.install" -destinationFolder /usr/local/MATLAB -agreeToLicense yes -mode silent \
   && rm "Fmask_${FMASK_VERSION}_Linux_mcr.install"
 RUN yum -y install libXt
-#COPY ./run_Fmask.sh /usr/bin
+COPY ./run_Fmask.sh /usr/bin
 
 RUN REPO_NAME=espa-product-formatter \
     && cd $SRC_DIR \
