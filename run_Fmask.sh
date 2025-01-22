@@ -1,3 +1,3 @@
 #!/bin/bash
-/usr/local/MATLAB/application/run_Fmask_4_6.sh /usr/local/MATLAB/v910 /usr/local/MATLAB/application/AuxiData/
+/usr/local/MATLAB/application/run_Fmask_4_7.sh /usr/local/MATLAB/R2022b /usr/local/MATLAB/application/AuxiData/ 
 

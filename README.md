@@ -2,7 +2,7 @@
 This repository contains a base Dockerfile for shared libraries for HLS Landast and Sentinel processing.
 
 ### Pre-requisites
-The `lasrc` and `hls` code requires a number of [dependencies](https://github.com/nasa-impact/espa-surface-reflectance/tree/master/lasrc#dependencies). To manage these dependencies in a more streamlined way the `Dockerfile` uses a base image which can be built using the `usgs.espa.centos.external` template defined in the [espa-dockerfiles](https://github.com/nasa-impact/espa-dockerfiles) repository.
+The `LaSRC` and `HLS` code require a number of [dependencies](https://github.com/nasa-impact/espa-surface-reflectance/tree/master/lasrc#dependencies). To manage these dependencies in a more streamlined way the `Dockerfile` uses a base image which can be built using the `usgs.espa.centos.external` template defined in the [espa-dockerfiles](https://github.com/nasa-impact/espa-dockerfiles) repository.
 
 See the instructions in the [espa-dockerfiles](https://github.com/nasa-impact/espa-dockerfiles) repository for building the external dependencies image.
 
