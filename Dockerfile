@@ -37,7 +37,7 @@ RUN REPO_NAME=espa-product-formatter \
     && rm -rf ${REPO_NAME}
 RUN REPO_NAME=espa-surface-reflectance \
     && cd $SRC_DIR \
-    && git clone -b "eros-collection2-3.5.1" https://github.com/NASA-IMPACT/${REPO_NAME}.git \
+    && git clone -b "eros-collection2-3.5.2" https://github.com/NASA-IMPACT/${REPO_NAME}.git \
     && cd ${REPO_NAME} \
     && make ENABLE_THREADING=yes \
     && make install \
