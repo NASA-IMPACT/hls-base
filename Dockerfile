@@ -6,7 +6,7 @@ ENV PREFIX=/usr/local \
     ECS_ENABLE_TASK_IAM_ROLE=true \
     PYTHONPATH="${PREFIX}/lib/python3.6/site-packages" \
     ESPA_SCHEMA="${PREFIX}/schema/espa_internal_metadata_v2_2.xsd" \
-    FMASK_VERSION="4_7"
+    FMASK_VERSION="4_7_issue40"
 
 RUN pip3 install scipy gsutil awscli gdal~=2.4
 
